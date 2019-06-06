@@ -8,6 +8,7 @@ public class Event {
     private final long timestamp;
 
     public Event(String type, long timestamp) {
+    	if(type == null || type.isEmpty() || timestamp <= 0L) throw new IllegalArgumentException();
         this.type = type;
         this.timestamp = timestamp;
     }
