@@ -1,9 +1,11 @@
-package net.intelie.challenges;
+package net.intelie.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryEventIterator implements EventIterator {
+	//TODO MUST BE A LINKED LIST
+	
 	
 	private List<Event> events = new ArrayList<Event>();
 	private int index = -1;

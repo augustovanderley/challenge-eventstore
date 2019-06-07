@@ -1,4 +1,4 @@
-package net.intelie.challenges;
+package net.intelie.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,13 +28,17 @@ public class MemoryEventStore implements EventStore {
 
 	@Override
 	public void removeAll(String type) {
-		// TODO Auto-generated method stub
-
+		typeToTimestamps.remove(type);
 	}
 
 	@Override
 	public EventIterator query(String type, long startTime, long endTime) {
+		if(invalidsArguments(type, startTime, endTime)) throw new IllegalArgumentException();
+		
 		List<Long> timeStamps = typeToTimestamps.get(type);
+		
+		if(noTimeStampsFound(timeStamps)) return new MemoryEventIterator(new ArrayList<Event>());
+		
 		List<Event> eventsInInterval = new ArrayList<Event>();
 		for (Long singleTimeStamp : timeStamps) {
 			if(singleTimeStamp >= startTime && singleTimeStamp < endTime) {
@@ -42,6 +46,14 @@ public class MemoryEventStore implements EventStore {
 			}
 		}
 		return new MemoryEventIterator(eventsInInterval);
+	}
+
+	private boolean noTimeStampsFound(List<Long> timeStamps) {
+		return timeStamps == null || timeStamps.isEmpty();
+	}
+
+	private boolean invalidsArguments(String type, long startTime, long endTime) {
+		return type == null || type.isEmpty() || startTime < 0 || endTime < 0 || startTime >= endTime;
 	}
 
 }

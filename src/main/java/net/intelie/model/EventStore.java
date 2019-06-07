@@ -1,4 +1,4 @@
-package net.intelie.challenges;
+package net.intelie.model;
 
 /**
  * An abstraction of an event store.
