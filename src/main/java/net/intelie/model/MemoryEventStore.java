@@ -26,20 +26,18 @@ public class MemoryEventStore implements EventStore {
 		if(invalidsArguments(type, startTime, endTime)) throw new IllegalArgumentException();
 		
 		List<StoredEvent> storedEvents = typeToTimestamps.get(type);
+		if(notFound(storedEvents)) return new MemoryEventIterator(new LinkedList<StoredEvent>());
 		
-		if(noTimeStampsFound(storedEvents)) return new MemoryEventIterator(new LinkedList<StoredEvent>());
-		
-		List<StoredEvent> eventsInInterval = new LinkedList<StoredEvent>();
-		
+		LinkedList<StoredEvent> eventsInInterval = new LinkedList<StoredEvent>();
 		for (StoredEvent storedEvent : storedEvents) {
-			if(storedEvent.retrieveTimeStamp() >= startTime && storedEvent.retrieveTimeStamp() < endTime) {
+			if(storedEvent.isActive() && (storedEvent.retrieveTimeStamp() >= startTime && storedEvent.retrieveTimeStamp() < endTime)) {
 				eventsInInterval.add(storedEvent);
 			}
 		}
 		return new MemoryEventIterator(eventsInInterval);
 	}
 
-	private boolean noTimeStampsFound(List<StoredEvent> storedEvents) {
+	private boolean notFound(List<StoredEvent> storedEvents) {
 		return storedEvents == null || storedEvents.isEmpty();
 	}
 
