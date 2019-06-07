@@ -1,18 +1,19 @@
 package net.intelie.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class StoredEvent {
 
-	private final static AtomicInteger id  = new AtomicInteger();
+	private static AtomicLong nextId = new AtomicLong();
+	
+	private final long id;
 	private final Event event;
 	private boolean active;
 	
 	public StoredEvent(Event event) {
+		this.id = nextId.incrementAndGet();
 		this.event = event;
 		active = true;
-		id.incrementAndGet();
-		System.out.println(id);
 	}
 
 	public long retrieveTimeStamp() {
@@ -21,6 +22,37 @@ public class StoredEvent {
 	
 	public Event getEvent() {
 		return event;
-		
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof StoredEvent)) {
+			return false;
+		}
+		StoredEvent other = (StoredEvent) obj;
+		if (id != other.id) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+	
+	
 }
