@@ -2,28 +2,18 @@ package net.intelie.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class MemoryEventStore implements EventStore {
 
-	Map<String, List<Long>> typeToTimestamps = new HashMap<String, List<Long>>();
+	Map<String, List<StoredEvent>> typeToTimestamps = new HashMap<String, List<StoredEvent>>();
 	
 	@Override
 	public void insert(Event event) {
-		String typeKey = event.type();
-		if(typeToTimestamps.containsKey(typeKey)) {
-			List<Long> timestamps = typeToTimestamps.get(typeKey);
-			timestamps.add(event.timestamp());
-		} else {
-			List<Long> timestamps = new ArrayList<Long>();
-			timestamps.add(event.timestamp());
-			typeToTimestamps.put(typeKey, timestamps);
-		}
-		
-		//typeToTimestamps.putIfAbsent(event.type(), new ArrayList<Long>());
-		//typeToTimestamps.get(event.type()).add(event.timestamp());
-
+		typeToTimestamps.putIfAbsent(event.type(), new ArrayList<StoredEvent>());
+		typeToTimestamps.get(event.type()).add(new StoredEvent(event));
 	}
 
 	@Override
@@ -35,21 +25,22 @@ public class MemoryEventStore implements EventStore {
 	public EventIterator query(String type, long startTime, long endTime) {
 		if(invalidsArguments(type, startTime, endTime)) throw new IllegalArgumentException();
 		
-		List<Long> timeStamps = typeToTimestamps.get(type);
+		List<StoredEvent> storedEvents = typeToTimestamps.get(type);
 		
-		if(noTimeStampsFound(timeStamps)) return new MemoryEventIterator(new ArrayList<Event>());
+		if(noTimeStampsFound(storedEvents)) return new MemoryEventIterator(new LinkedList<StoredEvent>());
 		
-		List<Event> eventsInInterval = new ArrayList<Event>();
-		for (Long singleTimeStamp : timeStamps) {
-			if(singleTimeStamp >= startTime && singleTimeStamp < endTime) {
-				eventsInInterval.add(new Event(type, singleTimeStamp));
+		List<StoredEvent> eventsInInterval = new LinkedList<StoredEvent>();
+		
+		for (StoredEvent storedEvent : storedEvents) {
+			if(storedEvent.retrieveTimeStamp() >= startTime && storedEvent.retrieveTimeStamp() < endTime) {
+				eventsInInterval.add(storedEvent);
 			}
 		}
 		return new MemoryEventIterator(eventsInInterval);
 	}
 
-	private boolean noTimeStampsFound(List<Long> timeStamps) {
-		return timeStamps == null || timeStamps.isEmpty();
+	private boolean noTimeStampsFound(List<StoredEvent> storedEvents) {
+		return storedEvents == null || storedEvents.isEmpty();
 	}
 
 	private boolean invalidsArguments(String type, long startTime, long endTime) {

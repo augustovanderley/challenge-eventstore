@@ -31,4 +31,8 @@ public class EventStoreBuilder {
 		eventStore.removeAll(type);
 		return this;
 	}
+	
+	public EventStore create() {
+		return eventStore;
+	}
 }

@@ -5,6 +5,9 @@ import org.junit.Test;
 import net.intelie.model.Event;
 
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat; 
+import static org.hamcrest.Matchers.*;
+
 
 public class EventTest {
 	
@@ -15,6 +18,7 @@ public class EventTest {
 
         assertEquals(123L, event.timestamp());
         assertEquals("some_type", event.type());
+
     }
     
     @Test(expected=IllegalArgumentException.class)

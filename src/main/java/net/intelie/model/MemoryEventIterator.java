@@ -1,18 +1,26 @@
 package net.intelie.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MemoryEventIterator implements EventIterator {
 	//TODO MUST BE A LINKED LIST
 	
 	
-	private List<Event> events = new ArrayList<Event>();
-	private int index = -1;
-	private boolean status;
-	public MemoryEventIterator(List<Event> events) {
-		this.events = events;
-		status = false;
+	private final LinkedList<StoredEvent> storedEvents;
+	private StoredEvent currentStoredEvent = null;
+	private Iterator<StoredEvent> iterator;
+	private boolean reachedEndofIterator;
+	
+	
+	
+	public MemoryEventIterator(List<StoredEvent> storedEvents) {
+		this.storedEvents = (LinkedList<StoredEvent>) storedEvents;
+		reachedEndofIterator = false;
+		iterator = this.storedEvents.iterator();
+
 	}
 
 	@Override
@@ -23,24 +31,20 @@ public class MemoryEventIterator implements EventIterator {
 
 	@Override
 	public boolean moveNext() {
-		if(events.isEmpty() || (index + 1) >= events.size()) {
-			status = false;
+		if(!iterator.hasNext()) {
+			reachedEndofIterator = true;
 			return false;
 		}
-		index++;
-		status = true;
+		currentStoredEvent = iterator.next();
 		return true;
 	}
 
 	@Override
 	public Event current() {
-		if (index < 0 || status == false) {
-			//TODO CHECK 
-			//if {@link #moveNext} was never called
-		    // *                               or its last result was {@code false}.
+		if(currentStoredEvent == null || reachedEndofIterator) {
 			throw new IllegalStateException();
 		}
-		return events.get(index);
+		return currentStoredEvent.getEvent();
 	}
 
 	@Override
