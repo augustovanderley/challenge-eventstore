@@ -77,7 +77,7 @@ public class MemoryEventIteratorTest {
 	
 	@Test(expected = IllegalStateException.class)
 	@SuppressWarnings("unused")
-	public void current_NoEventGiven_ShouldReturnException() {
+	public void current_MoveNextFalseGiven_ShouldReturnException() {
 		eventIterator = new MemoryEventIterator(new LinkedList<StoredEvent>());
 		assertThat(eventIterator.moveNext(), is(false));
 		Event current = eventIterator.current();

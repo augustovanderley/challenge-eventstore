@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import net.intelie.model.Event;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 
 
@@ -14,8 +16,8 @@ public class EventTest {
     public void contructor_ValidValuesGiven_ShouldReturnValidEvent() {
         Event event = new Event("some_type", 123L);
 
-        assertEquals(123L, event.timestamp());
-        assertEquals("some_type", event.type());
+        assertThat(event.timestamp(), is(123L));
+        assertThat(event.type(), is("some_type"));
 
     }
     

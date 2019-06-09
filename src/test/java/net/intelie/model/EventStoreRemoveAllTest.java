@@ -1,16 +1,16 @@
 package net.intelie.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Test;
 
-import net.intelie.model.Event;
-import net.intelie.model.EventIterator;
-import net.intelie.model.EventStore;
-import net.intelie.model.MemoryEventStore;
+import net.intelie.builder.EventStoreBuilder;
+import net.intelie.consumer.EventConsumer;
 
 public class EventStoreRemoveAllTest {
     private EventIterator queryResult;
@@ -23,31 +23,23 @@ public class EventStoreRemoveAllTest {
     	memoryEventStore.removeAll("type1");
     	
     	queryResult = memoryEventStore.query("type1", 122L, 124L);
-    	assertFalse(queryResult.moveNext());	
+    	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
+    	assertThat(eventsExtracted.isEmpty(), is(true));	
     }
     
     @Test
     public void removeAll_NotEmptyTypeStoreGiven_ShouldReturnEmptyTypeStore() {
     	
-    	EventStore memoryEventStore = new MemoryEventStore();
-    	memoryEventStore.insert(new Event("type1", 123L));
-    	memoryEventStore.insert(new Event("type1", 124L));
-    	
+    	EventStore memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(new Event("type1", 123L))
+    			.insert(new Event("type1", 124L)).create();
     	queryResult = memoryEventStore.query("type1", 122L, 125L);
-    	assertTrue(queryResult.moveNext());	
-    	Event retrievedEvent = queryResult.current();
-    	assertEquals("type1" , retrievedEvent.type() );
-    	assertEquals(123L , retrievedEvent.timestamp() );
-    	assertTrue(queryResult.moveNext());	
-    	retrievedEvent = queryResult.current();
-    	assertEquals("type1" , retrievedEvent.type() );
-    	assertEquals(124L , retrievedEvent.timestamp() );
-    	
     	
     	memoryEventStore.removeAll("type1");
     	
     	queryResult = memoryEventStore.query("type1", 122L, 125L);
-    	assertFalse(queryResult.moveNext());	
+    	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
+    	assertThat(eventsExtracted.isEmpty(), is(true));
+  
     }
     
     @After

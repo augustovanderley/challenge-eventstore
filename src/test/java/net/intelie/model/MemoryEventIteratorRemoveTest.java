@@ -43,10 +43,24 @@ public class MemoryEventIteratorRemoveTest {
 		events.add(event5);
 		
 	}
+
+	@Test(expected = IllegalStateException.class)
+	public void remove_EmptyListGiven_ShouldThrowException() {
+    	queryResult = new EventStoreBuilder().memoryEventStore().query("type1", 33L, 43L);
+    	queryResult.remove();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void remove_MoveNextFalseGiven_ShouldThrowException() {
+    	queryResult = new EventStoreBuilder().memoryEventStore().query("type1", 33L, 43L);
+    	assertThat(queryResult.moveNext(), is(false));
+    	queryResult.remove();
+	}
+	
 	
 	@Test
 	public void remove_ListWithFiveEventsGiven_ShouldRemoveOneEvent() {
-    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insertEvent(events).create();
+    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(events).create();
     	queryResult = memoryEventStore.query("type1", 33L, 43L);
     	queryResult.moveNext();
     	queryResult.remove();
@@ -59,7 +73,7 @@ public class MemoryEventIteratorRemoveTest {
 	
 	@Test 
 	public void remove_ListWithFiveEventsGiven_ShouldRemoveAllEvents() {
-    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insertEvent(events).create();
+    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(events).create();
     	queryResult = memoryEventStore.query("type1", 33L, 43L);
     	while(queryResult.moveNext()) {
     		queryResult.remove();

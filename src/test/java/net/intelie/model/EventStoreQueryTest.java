@@ -84,7 +84,7 @@ public class EventStoreQueryTest {
     
     @Test
     public void query_LastEventTimestampEqualToEndTimeGiven_ShouldReturnListWithoutLastEvent() {
-    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insertEvent(events).create();
+    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(events).create();
     	queryResult = memoryEventStore.query("type1", 33L, 42L);
     	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
     	assertThat(eventsExtracted, hasSize(4));
@@ -94,7 +94,7 @@ public class EventStoreQueryTest {
     
     @Test
     public void  query_LastEventTimestampLessThanEndTimeGiven_ShouldReturnListWithLastEvent() {
-    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insertEvent(events).create();
+    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(events).create();
     	queryResult = memoryEventStore.query("type1", 33L, 43L);
     	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
     	assertThat(eventsExtracted, hasSize(5));
@@ -104,7 +104,7 @@ public class EventStoreQueryTest {
     
     @Test
     public void query_NoEventsBetweenStartAndEndGiven_ShouldReturnEmptyList() {
-    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insertEvent(events).create();
+    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(events).create();
     	queryResult = memoryEventStore.query("type1", 37L, 38L);
     	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
     	assertThat(eventsExtracted.isEmpty(), is(true));
