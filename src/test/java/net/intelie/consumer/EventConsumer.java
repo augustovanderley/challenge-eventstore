@@ -1,4 +1,4 @@
-package net.intelie.builder;
+package net.intelie.consumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class EventConsumer {
 		this.queryResult = queryResult;
 	}
 
-	public List<Event> extractAllEvents() {
+	public List<Event> extractNextEvents() {
 		List<Event> events = new ArrayList<Event>();
 		while(queryResult.moveNext()) {
 			events.add(queryResult.current());

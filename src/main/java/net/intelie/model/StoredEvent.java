@@ -11,6 +11,7 @@ public class StoredEvent {
 	private boolean active;
 	
 	public StoredEvent(Event event) {
+		if(event == null) throw new IllegalArgumentException();
 		this.id = nextId.incrementAndGet();
 		this.event = event;
 		active = true;
@@ -52,6 +53,10 @@ public class StoredEvent {
 
 	public boolean isActive() {
 		return active;
+	}
+
+	public void inactive() {
+		active = false;
 	}
 	
 	

@@ -5,15 +5,13 @@ import org.junit.Test;
 import net.intelie.model.Event;
 
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat; 
-import static org.hamcrest.Matchers.*;
 
 
 public class EventTest {
 	
 
     @Test
-    public void contructorTest() {
+    public void contructor_ValidValuesGiven_ShouldReturnValidEvent() {
         Event event = new Event("some_type", 123L);
 
         assertEquals(123L, event.timestamp());
@@ -23,25 +21,25 @@ public class EventTest {
     
     @Test(expected=IllegalArgumentException.class)
     @SuppressWarnings("unused")
-    public void contructorNullType() {
+    public void contructor_NullTypeGiven_ShouldReturnException() {
         Event event = new Event(null, 123L);
     }
     
     @Test(expected=IllegalArgumentException.class)
     @SuppressWarnings("unused")
-    public void contructorEmptyType() {
+    public void contructor_EmptyTypeGiven_ShouldReturnException() {
         Event event = new Event("", 123L);
     }
     
     @Test(expected=IllegalArgumentException.class)
     @SuppressWarnings("unused")
-    public void contructorNegativeValue() {
+    public void contructor_NegativeValueGiven_ShouldReturnException() {
         Event event = new Event("", -3L);
     }
     
     @Test(expected=IllegalArgumentException.class)
     @SuppressWarnings("unused")
-    public void contructorZeroValue() {
+    public void contructor_ZeroValueGiven_ShouldReturnException() {
         Event event = new Event("", 0L);
     }
     

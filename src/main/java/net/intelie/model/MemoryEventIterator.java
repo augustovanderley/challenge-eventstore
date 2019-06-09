@@ -1,15 +1,13 @@
 package net.intelie.model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MemoryEventIterator implements EventIterator {
-	//TODO MUST BE A LINKED LIST
 	
 	
-	private final LinkedList<StoredEvent> storedEvents;
+	private LinkedList<StoredEvent> storedEvents;
 	private StoredEvent currentStoredEvent = null;
 	private Iterator<StoredEvent> iterator;
 	private boolean reachedEndofIterator;
@@ -17,22 +15,25 @@ public class MemoryEventIterator implements EventIterator {
 	
 	
 	public MemoryEventIterator(List<StoredEvent> storedEvents) {
+		if(storedEvents == null) throw new IllegalArgumentException();
 		this.storedEvents = (LinkedList<StoredEvent>) storedEvents;
 		reachedEndofIterator = false;
 		iterator = this.storedEvents.iterator();
-
 	}
 
 	@Override
-	public void close() throws Exception {
-		// TODO Auto-generated method stub
+	public void close() {
+		storedEvents = null;
+		currentStoredEvent = null;
 
 	}
 
 	@Override
 	public boolean moveNext() {
+		if(storedEvents == null) return false;
 		if(!iterator.hasNext()) {
 			reachedEndofIterator = true;
+			close();
 			return false;
 		}
 		currentStoredEvent = iterator.next();
@@ -41,16 +42,18 @@ public class MemoryEventIterator implements EventIterator {
 
 	@Override
 	public Event current() {
-		if(currentStoredEvent == null || reachedEndofIterator) {
-			throw new IllegalStateException();
-		}
+		if(!hasCurrent()) throw new IllegalStateException();
 		return currentStoredEvent.getEvent();
 	}
+	
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
-
+		if(!hasCurrent()) throw new IllegalStateException();
+		currentStoredEvent.inactive();
 	}
 
+	private boolean hasCurrent() {
+		return currentStoredEvent != null && !reachedEndofIterator;
+	}
 }
