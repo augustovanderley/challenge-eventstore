@@ -24,6 +24,7 @@ public class MemoryEventIterator implements EventIterator {
 	@Override
 	public void close() {
 		storedEvents = null;
+		iterator = null;
 		currentStoredEvent = null;
 
 	}

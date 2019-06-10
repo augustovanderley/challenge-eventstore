@@ -59,7 +59,7 @@ public class MemoryEventIteratorRemoveTest {
 	
 	
 	@Test
-	public void remove_ListWithFiveEventsGiven_ShouldRemoveOneEvent() {
+	public void remove_ListWithFiveEventsGiven_ShouldRemoveFirstEvent() {
     	memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(events).create();
     	queryResult = memoryEventStore.query("type1", 33L, 43L);
     	queryResult.moveNext();
@@ -69,6 +69,23 @@ public class MemoryEventIteratorRemoveTest {
     	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
     	assertThat(eventsExtracted, hasSize(4));
     	assertThat(eventsExtracted, contains(event2, event3, event4, event5));
+	}
+	
+	@Test 
+	public void remove_ListWithFiveEventsGiven_ShouldRemoveLastEvent() {
+    	memoryEventStore = new EventStoreBuilder().memoryEventStore().insert(events).create();
+    	queryResult = memoryEventStore.query("type1", 33L, 43L);
+    	queryResult.moveNext();
+    	queryResult.moveNext();
+    	queryResult.moveNext();
+    	queryResult.moveNext();
+    	queryResult.moveNext();
+    	queryResult.remove();
+    	closingEventIterator();
+    	queryResult = memoryEventStore.query("type1", 33L, 43L);
+    	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
+    	assertThat(eventsExtracted, hasSize(4));
+    	assertThat(eventsExtracted, contains(event1, event2, event3, event4));
 	}
 	
 	@Test 
