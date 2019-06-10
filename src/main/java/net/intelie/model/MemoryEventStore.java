@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryEventStore implements EventStore {
 
-	Map<String, List<StoredEvent>> typeToTimestamps = new HashMap<String, List<StoredEvent>>();
+	Map<String, List<StoredEvent>> typeToTimestamps = new ConcurrentHashMap<String, List<StoredEvent>>();
 	
 	@Override
 	public void insert(Event event) {
