@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="ModelTest">
+    <classes>
+      <class name="net.intelie.model.MemoryEventIteratorTest"/>
+      <class name="net.intelie.model.MemoryEventIteratorRemoveTest"/>
+      <class name="net.intelie.model.EventStoreInsertTest"/>
+      <class name="net.intelie.model.EventTest"/>
+      <class name="net.intelie.model.EventStoreQueryTest"/>
+      <class name="net.intelie.model.EventStoreRemoveAllTest"/>
+      <class name="net.intelie.model.StoredEventTest"/>
+    </classes>
+  </test> <!-- ModelTest -->
+</suite> <!-- Suite -->

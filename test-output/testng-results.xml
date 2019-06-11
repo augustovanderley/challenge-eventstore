@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="28" started-at="2019-06-11T02:44:54Z" finished-at="2019-06-11T02:44:54Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="28" started-at="2019-06-11T02:44:54Z" finished-at="2019-06-11T02:44:54Z">
+      <class name="net.intelie.model.StoredEventTest">
+        <test-method status="PASS" signature="equals_SameStoredEventGiven_ShouldReturnTrue()[pri:0, instance:net.intelie.model.StoredEventTest@737996a0]" name="equals_SameStoredEventGiven_ShouldReturnTrue" duration-ms="12" started-at="2019-06-10T23:44:54Z" finished-at="2019-06-10T23:44:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- equals_SameStoredEventGiven_ShouldReturnTrue -->
+        <test-method status="PASS" signature="equals_TwoDiffStoredEventsGiven_ShouldReturnFalse()[pri:0, instance:net.intelie.model.StoredEventTest@737996a0]" name="equals_TwoDiffStoredEventsGiven_ShouldReturnFalse" duration-ms="1" started-at="2019-06-10T23:44:54Z" finished-at="2019-06-10T23:44:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- equals_TwoDiffStoredEventsGiven_ShouldReturnFalse -->
+        <test-method status="PASS" signature="hashCode_SameStoredEventGiven_ShouldReturnTrue()[pri:0, instance:net.intelie.model.StoredEventTest@737996a0]" name="hashCode_SameStoredEventGiven_ShouldReturnTrue" duration-ms="1" started-at="2019-06-10T23:44:54Z" finished-at="2019-06-10T23:44:54Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- hashCode_SameStoredEventGiven_ShouldReturnTrue -->
+      </class> <!-- net.intelie.model.StoredEventTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
