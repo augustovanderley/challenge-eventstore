@@ -1,5 +1,8 @@
 package net.intelie.model;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasSize;
@@ -8,10 +11,6 @@ import static org.hamcrest.Matchers.is;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import net.intelie.builder.EventStoreBuilder;
 import net.intelie.consumer.EventConsumer;
 
@@ -19,7 +18,7 @@ public class MemoryEventIteratorRemoveTest {
 	
 	
 	private EventStore memoryEventStore;
-	List<Event> events = new ArrayList<Event>();
+	List<Event> events;
 	private Event event1;
 	private Event event2;
 	private Event event3;
@@ -27,7 +26,7 @@ public class MemoryEventIteratorRemoveTest {
 	private Event event5;
 	private EventIterator queryResult;
 	
-	@Before
+	@BeforeMethod
 	public void setUp() {
 		memoryEventStore = new MemoryEventStore();
     	event1 = new Event("type1", 33L);
@@ -35,7 +34,7 @@ public class MemoryEventIteratorRemoveTest {
     	event3 = new Event("type1", 38L);
     	event4 = new Event("type1", 39L);
     	event5 = new Event("type1", 42L);
-
+    	events = new ArrayList<Event>();
     	events.add(event1);
 		events.add(event2);
 		events.add(event3);
@@ -44,13 +43,13 @@ public class MemoryEventIteratorRemoveTest {
 		
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expectedExceptions = IllegalStateException.class)
 	public void remove_EmptyListGiven_ShouldThrowException() {
     	queryResult = new EventStoreBuilder().memoryEventStore().query("type1", 33L, 43L);
     	queryResult.remove();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expectedExceptions = IllegalStateException.class)
 	public void remove_MoveNextFalseGiven_ShouldThrowException() {
     	queryResult = new EventStoreBuilder().memoryEventStore().query("type1", 33L, 43L);
     	assertThat(queryResult.moveNext(), is(false));
@@ -101,8 +100,8 @@ public class MemoryEventIteratorRemoveTest {
     	assertThat(eventsExtracted.isEmpty(), is(true));
 	}
 	
-    @After
-    public void close() {
+    @AfterMethod
+	public void close() {
     	closingEventIterator();
     }
     

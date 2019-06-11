@@ -1,20 +1,18 @@
 package net.intelie.model;
 
 
+import static org.testng.AssertJUnit.assertFalse;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertFalse;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import net.intelie.builder.EventStoreBuilder;
 import net.intelie.consumer.EventConsumer;
@@ -22,7 +20,7 @@ import net.intelie.consumer.EventConsumer;
 public class EventStoreQueryTest {
 	
 	private EventStore memoryEventStore;
-	List<Event> events = new ArrayList<Event>();
+	List<Event> events;
 	private Event event1;
 	private Event event2;
 	private Event event3;
@@ -30,7 +28,7 @@ public class EventStoreQueryTest {
 	private Event event5;
 	private EventIterator queryResult;
 	
-	@Before
+	@BeforeMethod
 	public void setUp() {
 		memoryEventStore = new MemoryEventStore();
     	event1 = new Event("type1", 33L);
@@ -38,7 +36,7 @@ public class EventStoreQueryTest {
     	event3 = new Event("type1", 38L);
     	event4 = new Event("type1", 39L);
     	event5 = new Event("type1", 42L);
-
+    	events = new ArrayList<Event>();
     	events.add(event1);
 		events.add(event2);
 		events.add(event3);
@@ -47,31 +45,31 @@ public class EventStoreQueryTest {
 		
 	}
 	
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void query_EmptyStringGiven_ShouldThrowException() {
     	memoryEventStore.query("", 122L, 124L);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void query_NullStringGiven_ShouldThrowException() {
     	memoryEventStore.query(null, 122L, 124L);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void query_NegativeStartTimeGiven_ShouldThrowException(){    	
     	memoryEventStore.query("type1", -3L, 3L);
     }
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void query_NegativeEndingTimeGiven_ShouldThrowException() {    	
     	memoryEventStore.query("type1", -3L, -2L);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void query_EndingBeforeStartGiven_ShouldThrowException() {
     	memoryEventStore.query("type1", 30L, 10L);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expectedExceptions=IllegalArgumentException.class)
     public void query_StartSameEndingGiven_ShouldThrowException() {
     	memoryEventStore.query("type1", 30L, 30L);
     }
@@ -110,8 +108,8 @@ public class EventStoreQueryTest {
     	assertThat(eventsExtracted.isEmpty(), is(true));
     }
     
-    @After
-    public void close() {
+    @AfterMethod
+	public void close() {
     	try {
     		if(queryResult != null) queryResult.close();
 		} catch (Exception e) {

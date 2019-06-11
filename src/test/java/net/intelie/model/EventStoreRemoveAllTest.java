@@ -1,13 +1,11 @@
 package net.intelie.model;
 
+import static org.testng.AssertJUnit.assertFalse;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-
 import java.util.List;
-
-import org.junit.After;
-import org.junit.Test;
 
 import net.intelie.builder.EventStoreBuilder;
 import net.intelie.consumer.EventConsumer;
@@ -42,8 +40,8 @@ public class EventStoreRemoveAllTest {
   
     }
     
-    @After
-    public void close() {
+    @AfterMethod
+	public void close() {
     	try {
     		if(queryResult != null) queryResult.close();
 		} catch (Exception e) {

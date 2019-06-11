@@ -1,13 +1,12 @@
 package net.intelie.model;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import java.util.LinkedList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 public class MemoryEventIteratorTest {
 
@@ -16,7 +15,7 @@ public class MemoryEventIteratorTest {
 	private Event event1;
 	private Event event2;
 
-	@Before
+	@BeforeMethod
 	public void setUp() {
 		storedEvents = new LinkedList<StoredEvent>();
 		event1 = new Event("type1", 123L);
@@ -25,7 +24,7 @@ public class MemoryEventIteratorTest {
 		storedEvents.add(storedEvent);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void constructor_NullValueGiven_ShouldReturnException() {
 		eventIterator = new MemoryEventIterator(null);
 	}
@@ -51,7 +50,7 @@ public class MemoryEventIteratorTest {
 		assertThat(eventIterator.moveNext(), is(false));
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expectedExceptions = IllegalStateException.class)
 	@SuppressWarnings("unused")
 	public void current_ClosedIteratorGiven_ShouldReturnException() {
 		eventIterator = new MemoryEventIterator(storedEvents);
@@ -60,7 +59,7 @@ public class MemoryEventIteratorTest {
 		Event current = eventIterator.current();
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expectedExceptions = IllegalStateException.class)
 	public void remove_ClosedIteratorGiven_ShouldReturnException() {
 		eventIterator = new MemoryEventIterator(storedEvents);
 		assertThat(eventIterator.moveNext(), is(true));
@@ -68,14 +67,14 @@ public class MemoryEventIteratorTest {
 		eventIterator.remove();
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expectedExceptions = IllegalStateException.class)
 	@SuppressWarnings("unused")
 	public void current_NoCallToMoveNextGiven_ShouldReturnException() {
 		eventIterator = new MemoryEventIterator(storedEvents);
 		Event current = eventIterator.current();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expectedExceptions = IllegalStateException.class)
 	@SuppressWarnings("unused")
 	public void current_MoveNextFalseGiven_ShouldReturnException() {
 		eventIterator = new MemoryEventIterator(new LinkedList<StoredEvent>());
@@ -105,7 +104,7 @@ public class MemoryEventIteratorTest {
 		assertThat(eventIterator.moveNext(), is(false));
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expectedExceptions = IllegalStateException.class)
 	public void current_NoMoreElementsInIteratorGiven_ShouldReturnException() {
 		storedEvents.add(new StoredEvent(event2));
 		eventIterator = new MemoryEventIterator(storedEvents);
@@ -118,7 +117,7 @@ public class MemoryEventIteratorTest {
 		current = eventIterator.current();
 	}
 	
-	@After
+	@AfterMethod
 	public void close() {
 		closingEventIterator();
 	}

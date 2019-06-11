@@ -46,7 +46,7 @@ public class MemoryEventStore implements EventStore {
 	}
 
 	private boolean invalidsArguments(String type, long startTime, long endTime) {
-		return type == null || type.isEmpty() || startTime < 0 || endTime < 0 || startTime >= endTime;
+		return type == null || type.isEmpty() || startTime < 0  || startTime >= endTime;
 	}
 
 }

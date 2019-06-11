@@ -1,14 +1,13 @@
 package net.intelie.model;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 import java.util.List;
-
-import org.junit.After;
-import org.junit.Test;
 
 import net.intelie.builder.EventStoreBuilder;
 import net.intelie.consumer.EventConsumer;
@@ -129,8 +128,8 @@ public class EventStoreInsertTest {
     	assertThat(eventsExtracted, contains(event3));
     }
     
-    @After
-    public void close() {
+    @AfterMethod
+	public void close() {
     	try {
     		if(queryResult != null) queryResult.close();
 		} catch (Exception e) {
