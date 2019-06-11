@@ -1,5 +1,6 @@
 package net.intelie.model;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class StoredEvent {
@@ -8,7 +9,7 @@ public class StoredEvent {
 	
 	private final long id;
 	private final Event event;
-	private boolean active;
+	private volatile boolean active;
 	
 	public StoredEvent(Event event) {
 		if(event == null) throw new IllegalArgumentException();
@@ -51,11 +52,11 @@ public class StoredEvent {
 		return true;
 	}
 
-	public boolean isActive() {
+	public synchronized boolean isActive() {
 		return active;
 	}
 
-	public void inactive() {
+	public synchronized void inactive() {
 		active = false;
 	}
 	

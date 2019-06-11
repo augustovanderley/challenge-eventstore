@@ -54,7 +54,10 @@ public class Event {
 		return true;
 	}
     
-    
+    @Override
+    	public String toString() {
+    		return "Event id: " + id +  ", type: " + type + ", timestamp: " + timestamp; 
+    	}
     
     
 }

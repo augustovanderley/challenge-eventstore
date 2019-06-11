@@ -1,20 +1,23 @@
 package net.intelie.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryEventStore implements EventStore {
 
-	Map<String, List<StoredEvent>> typeToTimestamps = new ConcurrentHashMap<String, List<StoredEvent>>();
+	ConcurrentHashMap<String, List<StoredEvent>> typeToTimestamps = new ConcurrentHashMap<String, List<StoredEvent>>();
 	
 	@Override
 	public void insert(Event event) {
-		typeToTimestamps.putIfAbsent(event.type(), new ArrayList<StoredEvent>());
+		typeToTimestamps.putIfAbsent(event.type(), Collections.synchronizedList(new ArrayList<StoredEvent>()));
 		typeToTimestamps.get(event.type()).add(new StoredEvent(event));
+
+		
 	}
 
 	@Override
@@ -33,6 +36,7 @@ public class MemoryEventStore implements EventStore {
 	}
 
 	private LinkedList<StoredEvent> retrieveStoredEvents(List<StoredEvent> storedEventsFromType , long startTime, long endTime) {
+
 		LinkedList<StoredEvent> eventsInInterval = new LinkedList<StoredEvent>();
 		storedEventsFromType
 			.stream()
