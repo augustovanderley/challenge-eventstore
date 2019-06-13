@@ -1,6 +1,5 @@
 package net.intelie.model;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class StoredEvent {

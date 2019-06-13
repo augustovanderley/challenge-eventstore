@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -18,8 +17,7 @@ import net.intelie.model.Event;
 import net.intelie.model.EventIterator;
 import net.intelie.model.MemoryEventStore;
 
-public class ConcurrencyInsertTest {
-	
+public class ConcurrencyQueryTest {
 	private static final int NUMBER_INVOCATIONS = 50;
 	private MemoryEventStore memoryEventStore;
 	private List<String> types;
@@ -42,26 +40,23 @@ public class ConcurrencyInsertTest {
 	}
 	
 	@Test(threadPoolSize = 10, invocationCount = NUMBER_INVOCATIONS)
-	public void insert_ListOfEventsToInsertGiven_ShouldInvokeMethodWithSucess() throws InterruptedException {
+	public void query_ListOfEventsGiven_ShouldInvokeMethodWithSucess() throws InterruptedException {
 		AtomicInteger i = new AtomicInteger();
 		while(i.get() < events.size()) {
 			memoryEventStore.insert(events.get(i.get()));
 			i.incrementAndGet();
 		}
+
+		EventIterator queryResult = memoryEventStore.query("type1", 1L, 10001L);
+
 		
+		AtomicInteger j = new AtomicInteger();
+		while(j.get() < events.size()) {
+			memoryEventStore.insert(events.get(j.get()));
+			j.incrementAndGet();
+		}
 
 	}
 	
-	@Test(alwaysRun = true, dependsOnMethods= {"insert_ListOfEventsToInsertGiven_ShouldInvokeMethodWithSucess"} )
-	public void insert_EventsInsertedConcurrently_ShouldReturnEventsCountEqualToListSizeTimesNumberOfInvocations() {
-		EventIterator queryResult = memoryEventStore.query("type1", 1L, 10001L);
-    	long extractedEventsTimeStampCount = 0;
-    	List<Event> eventsExtracted = new EventConsumer(queryResult).extractNextEvents();
-    	for (Event event : eventsExtracted) {
-			extractedEventsTimeStampCount += event.timestamp(); 
-		}
-    	assertThat(extractedEventsTimeStampCount, equalTo(eventsTimeStampCount * NUMBER_INVOCATIONS));
-    	assertThat(eventsExtracted, hasSize(events.size()*NUMBER_INVOCATIONS));
-    	
-	}
+
 }
