@@ -12,7 +12,7 @@ import net.intelie.model.Event;
 import net.intelie.model.EventIterator;
 import net.intelie.model.MemoryEventStore;
 
-public class ConcurrencyQueryTest {
+public class ConcurrencyAllComandsTest {
 	private static final int NUMBER_INVOCATIONS = 50;
 	private MemoryEventStore memoryEventStore;
 	private List<String> types;
@@ -33,21 +33,34 @@ public class ConcurrencyQueryTest {
 	}
 	
 	@Test(threadPoolSize = 10, invocationCount = NUMBER_INVOCATIONS)
-	public void query_ListOfEventsGiven_ShouldInvokeMethodWithSucess() throws InterruptedException {
+	public void allMethods_ListOfEventsGiven_ShouldInvokeMethodsWithSucess() throws InterruptedException {
 		AtomicInteger i = new AtomicInteger();
 		while(i.get() < events.size()) {
 			memoryEventStore.insert(events.get(i.get()));
 			i.incrementAndGet();
 		}
 
-		memoryEventStore.query("type1", 1L, 10001L);
-
+		EventIterator queryResult = memoryEventStore.query("type1", 1L, 10001L);
+		queryResult.moveNext();
+		queryResult.remove();
 		
 		AtomicInteger j = new AtomicInteger();
 		while(j.get() < events.size()) {
 			memoryEventStore.insert(events.get(j.get()));
 			j.incrementAndGet();
 		}
+		
+		memoryEventStore.removeAll("type1");
+		
+		AtomicInteger k = new AtomicInteger();
+		while(k.get() < events.size()) {
+			memoryEventStore.insert(events.get(k.get()));
+			k.incrementAndGet();
+		}
+		
+		EventIterator queryResult2 = memoryEventStore.query("type1", 1L, 10001L);
+		queryResult2.moveNext();
+		queryResult2.remove();
 
 	}
 	
