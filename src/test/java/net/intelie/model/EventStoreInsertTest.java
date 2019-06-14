@@ -15,6 +15,13 @@ import net.intelie.consumer.EventConsumer;
 public class EventStoreInsertTest {
 
     private EventIterator queryResult;
+    
+    @Test(expectedExceptions=IllegalArgumentException.class)
+    public void insert_NullEventGiven_ShouldThrowException() {
+    	MemoryEventStore memoryEventStore = new MemoryEventStore();
+    	Event event = null;
+    	memoryEventStore.insert(event);
+    }
 
 	@Test
     public void insert_EmptyStoreGiven_ShouldReturnAListWith1Event() {
@@ -127,6 +134,8 @@ public class EventStoreInsertTest {
     	assertThat(eventsExtracted, hasSize(1));
     	assertThat(eventsExtracted, contains(event3));
     }
+    
+
     
     @AfterMethod
 	public void close() {

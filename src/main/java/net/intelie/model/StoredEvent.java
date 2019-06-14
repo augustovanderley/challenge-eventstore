@@ -2,8 +2,20 @@ package net.intelie.model;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-public class StoredEvent {
 
+/**
+ * A Stored Event class. Receives an Event at inicialization. Used in MemoryEventStore to store events. 
+ */
+public class StoredEvent {
+	/*
+	 * This Class is responsible for events storage. By using StoredEvent instead of
+	 * events, an event can be stored multiple times. This is achieved by using
+	 * composition.
+	 * 
+	 * Furthermore, this class contains a flag, active, that indicates if this
+	 * stored event was removed. Reading and writing of this flag must be done in
+	 * synchronized methods.
+	 */
 	private static AtomicLong nextId = new AtomicLong();
 	
 	private final long id;

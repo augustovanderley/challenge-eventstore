@@ -1,11 +1,9 @@
 package net.intelie.model;
 
-import static org.testng.AssertJUnit.assertEquals;
-import org.testng.annotations.Test;
-import net.intelie.model.Event;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+
+import org.testng.annotations.Test;
 
 
 public class EventTest {

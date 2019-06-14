@@ -1,11 +1,12 @@
 package net.intelie.model;
 
-import static org.testng.AssertJUnit.assertFalse;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+
 import java.util.List;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 import net.intelie.builder.EventStoreBuilder;
 import net.intelie.consumer.EventConsumer;
@@ -13,8 +14,25 @@ import net.intelie.consumer.EventConsumer;
 public class EventStoreRemoveAllTest {
     private EventIterator queryResult;
 
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeAll_EmptyArgumentGiven_ShouldThrowException() {
+    	
+    	EventStore memoryEventStore = new MemoryEventStore();
+    	String testString = "";
+    	memoryEventStore.removeAll(testString);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeAll_NullArgumentGiven_ShouldThrowException() {
+    	
+    	EventStore memoryEventStore = new MemoryEventStore();
+    	String testString = null;
+    	memoryEventStore.removeAll(testString);
+    }
+    
 	@Test
-    public void removeAllEmptyStore() {
+    public void removeAll_EmptyStoreGiven_ShoudReturnEmptyEventList() {
     	
     	EventStore memoryEventStore = new MemoryEventStore();
     	

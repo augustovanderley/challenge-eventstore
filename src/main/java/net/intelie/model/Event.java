@@ -3,7 +3,7 @@ package net.intelie.model;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * This is just an event stub, feel free to expand it if needed.
+ * An event class. Must be created with a type and a timestamp. Each event gets a unique id.
  */
 public class Event {
 	private static AtomicLong nextId = new AtomicLong();
