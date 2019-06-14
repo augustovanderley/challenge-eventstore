@@ -31,18 +31,79 @@ div.shootout {padding:2em;border:3px #4854A8 solid}
 <body>
 <table cellspacing="0" cellpadding="0" class="result">
 <tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
-<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">3</td><td class="numi">3</td><td class="numi">0</td><td class="numi">0</td><td class="numi">0,0 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">6</td><td class="numi">6</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">0,0 seconds</td><td class="numi"></td><td class="numi"></td></tr>
 </table>
 <table cellspacing="0" cellpadding="0" class="passed" id="summary">
 <tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
+<tr><th colspan="4">Default test &#8212; failed</th></tr>
+<tr class="failedodd"><td rowspan="1">net.intelie.model.EventStoreInsertTest</td><td><a href="#m1"><b>insert_NullEventGiven_ShouldThrowException</b>  </a></td><td class="numi">1</td><td>1560490390014</td><td class="numi">0</td></tr>
 <tr><th colspan="4">Default test &#8212; passed</th></tr>
-<tr class="passedodd"><td rowspan="3">net.intelie.model.StoredEventTest</td><td><a href="#m1"><b>equals_SameStoredEventGiven_ShouldReturnTrue</b>  </a></td><td class="numi">1</td><td>1560221094245</td><td class="numi">12</td></tr><tr class="passedodd"><td><a href="#m2"><b>equals_TwoDiffStoredEventsGiven_ShouldReturnFalse</b>  </a></td><td class="numi">1</td><td>1560221094258</td><td class="numi">1</td></tr><tr class="passedodd"><td><a href="#m3"><b>hashCode_SameStoredEventGiven_ShouldReturnTrue</b>  </a></td><td class="numi">1</td><td>1560221094260</td><td class="numi">1</td></tr>
+<tr class="passedodd"><td rowspan="6">net.intelie.model.EventStoreInsertTest</td><td><a href="#m2"><b>insert_DiffTypeDiffNumberEventsGiven_ShouldReturn2ListWith1EventEach</b>  </a></td><td class="numi">1</td><td>1560490389989</td><td class="numi">17</td></tr><tr class="passedodd"><td><a href="#m3"><b>insert_DiffTypeSameNumberEventsGiven_ShouldReturn2ListWith1EventEach</b>  </a></td><td class="numi">1</td><td>1560490390008</td><td class="numi">1</td></tr><tr class="passedodd"><td><a href="#m4"><b>insert_EmptyStoreGiven_ShouldReturnAListWith1Event</b>  </a></td><td class="numi">1</td><td>1560490390011</td><td class="numi">1</td></tr><tr class="passedodd"><td><a href="#m5"><b>insert_SameTypeDiffNumberEventsGiven_ShouldReturnListWith2Events</b>  </a></td><td class="numi">1</td><td>1560490390017</td><td class="numi">1</td></tr><tr class="passedodd"><td><a href="#m6"><b>insert_SameTypeSameNumberEventsGiven_ShouldReturn1ListWith2Events</b>  </a></td><td class="numi">1</td><td>1560490390019</td><td class="numi">1</td></tr><tr class="passedodd"><td><a href="#m7"><b>insert_StoreWithTypeRemoveAllGiven_ShouldReturn1ListWith1Event</b>  </a></td><td class="numi">1</td><td>1560490390021</td><td class="numi">1</td></tr>
 </table>
 <h1>Default test</h1>
-<h2 id="m1">net.intelie.model.StoredEventTest:equals_TwoDiffStoredEventsGiven_ShouldReturnFalse</h2>
+<h2 id="m1">net.intelie.model.EventStoreInsertTest:insert_NullEventGiven_ShouldThrowException</h2>
+<div style="padding-left:3em">
+<p>
+Expected exception java.lang.IllegalArgumentException but got org.testng.TestException: 
+Expected exception java.lang.IllegalArgumentException but got java.lang.NullPointerException</p>
+org.testng.internal.Invoker.handleInvocationResults(Invoker.java:1497)
+<br/>at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1245)
+<br/>at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+<br/>at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+<br/>at org.testng.TestRunner.privateRun(TestRunner.java:767)
+<br/>at org.testng.TestRunner.run(TestRunner.java:617)
+<br/>at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+<br/>at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+<br/>at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+<br/>at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+<br/>at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+<br/>at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+<br/>at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+<br/>at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+<br/>at org.testng.TestNG.run(TestNG.java:1031)
+<br/>at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+<br/>at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+<br/>at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+<br/>1 lines not shown
+<p>Caused by 
+Expected exception java.lang.IllegalArgumentException but got java.lang.NullPointerException</p>
+org.testng.internal.Invoker.handleInvocationResults(Invoker.java:1497)
+<br/>at org.testng.internal.Invoker.invokeMethod(Invoker.java:754)
+<br/>at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+<br/>at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+<br/>at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+<br/>at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+<br/>at org.testng.TestRunner.privateRun(TestRunner.java:767)
+<br/>at org.testng.TestRunner.run(TestRunner.java:617)
+<br/>at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+<br/>at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+<br/>at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+<br/>at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+<br/>at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+<br/>at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+<br/>at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+<br/>at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+<br/>at org.testng.TestNG.run(TestNG.java:1031)
+<br/>at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+<br/>at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+<br/>at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+<br/>1 lines not shown
+<p>Caused by null</p>
+net.intelie.model.MemoryEventStore.insert(MemoryEventStore.java:44)
+<br/>at net.intelie.model.EventStoreInsertTest.insert_NullEventGiven_ShouldThrowException(EventStoreInsertTest.java:23)
+<br/>25 lines not shown
+</div>
 <p class="totop"><a href="#summary">back to summary</a></p>
-<h2 id="m2">net.intelie.model.StoredEventTest:equals_SameStoredEventGiven_ShouldReturnTrue</h2>
+<h2 id="m2">net.intelie.model.EventStoreInsertTest:insert_DiffTypeDiffNumberEventsGiven_ShouldReturn2ListWith1EventEach</h2>
 <p class="totop"><a href="#summary">back to summary</a></p>
-<h2 id="m3">net.intelie.model.StoredEventTest:hashCode_SameStoredEventGiven_ShouldReturnTrue</h2>
+<h2 id="m3">net.intelie.model.EventStoreInsertTest:insert_DiffTypeSameNumberEventsGiven_ShouldReturn2ListWith1EventEach</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m4">net.intelie.model.EventStoreInsertTest:insert_EmptyStoreGiven_ShouldReturnAListWith1Event</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m5">net.intelie.model.EventStoreInsertTest:insert_SameTypeDiffNumberEventsGiven_ShouldReturnListWith2Events</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m6">net.intelie.model.EventStoreInsertTest:insert_SameTypeSameNumberEventsGiven_ShouldReturn1ListWith2Events</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m7">net.intelie.model.EventStoreInsertTest:insert_StoreWithTypeRemoveAllGiven_ShouldReturn1ListWith1Event</h2>
 <p class="totop"><a href="#summary">back to summary</a></p>
 </body></html>

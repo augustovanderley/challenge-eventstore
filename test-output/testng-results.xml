@@ -1,25 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="3" passed="3">
+<testng-results skipped="0" failed="1" total="7" passed="6">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="28" started-at="2019-06-11T02:44:54Z" finished-at="2019-06-11T02:44:54Z">
+  <suite name="Default suite" duration-ms="44" started-at="2019-06-14T05:33:09Z" finished-at="2019-06-14T05:33:10Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="28" started-at="2019-06-11T02:44:54Z" finished-at="2019-06-11T02:44:54Z">
-      <class name="net.intelie.model.StoredEventTest">
-        <test-method status="PASS" signature="equals_SameStoredEventGiven_ShouldReturnTrue()[pri:0, instance:net.intelie.model.StoredEventTest@737996a0]" name="equals_SameStoredEventGiven_ShouldReturnTrue" duration-ms="12" started-at="2019-06-10T23:44:54Z" finished-at="2019-06-10T23:44:54Z">
+    <test name="Default test" duration-ms="44" started-at="2019-06-14T05:33:09Z" finished-at="2019-06-14T05:33:10Z">
+      <class name="net.intelie.model.EventStoreInsertTest">
+        <test-method status="PASS" signature="insert_DiffTypeDiffNumberEventsGiven_ShouldReturn2ListWith1EventEach()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="insert_DiffTypeDiffNumberEventsGiven_ShouldReturn2ListWith1EventEach" duration-ms="17" started-at="2019-06-14T02:33:09Z" finished-at="2019-06-14T02:33:10Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- equals_SameStoredEventGiven_ShouldReturnTrue -->
-        <test-method status="PASS" signature="equals_TwoDiffStoredEventsGiven_ShouldReturnFalse()[pri:0, instance:net.intelie.model.StoredEventTest@737996a0]" name="equals_TwoDiffStoredEventsGiven_ShouldReturnFalse" duration-ms="1" started-at="2019-06-10T23:44:54Z" finished-at="2019-06-10T23:44:54Z">
+        </test-method> <!-- insert_DiffTypeDiffNumberEventsGiven_ShouldReturn2ListWith1EventEach -->
+        <test-method status="PASS" signature="close()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="close" is-config="true" duration-ms="1" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- equals_TwoDiffStoredEventsGiven_ShouldReturnFalse -->
-        <test-method status="PASS" signature="hashCode_SameStoredEventGiven_ShouldReturnTrue()[pri:0, instance:net.intelie.model.StoredEventTest@737996a0]" name="hashCode_SameStoredEventGiven_ShouldReturnTrue" duration-ms="1" started-at="2019-06-10T23:44:54Z" finished-at="2019-06-10T23:44:54Z">
+        </test-method> <!-- close -->
+        <test-method status="PASS" signature="insert_DiffTypeSameNumberEventsGiven_ShouldReturn2ListWith1EventEach()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="insert_DiffTypeSameNumberEventsGiven_ShouldReturn2ListWith1EventEach" duration-ms="1" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- hashCode_SameStoredEventGiven_ShouldReturnTrue -->
-      </class> <!-- net.intelie.model.StoredEventTest -->
+        </test-method> <!-- insert_DiffTypeSameNumberEventsGiven_ShouldReturn2ListWith1EventEach -->
+        <test-method status="PASS" signature="close()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="close" is-config="true" duration-ms="0" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+        <test-method status="PASS" signature="insert_EmptyStoreGiven_ShouldReturnAListWith1Event()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="insert_EmptyStoreGiven_ShouldReturnAListWith1Event" duration-ms="1" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insert_EmptyStoreGiven_ShouldReturnAListWith1Event -->
+        <test-method status="PASS" signature="close()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="close" is-config="true" duration-ms="0" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+        <test-method status="FAIL" signature="insert_NullEventGiven_ShouldThrowException()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="insert_NullEventGiven_ShouldThrowException" duration-ms="0" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <exception class="org.testng.TestException">
+            <message>
+              <![CDATA[
+Expected exception java.lang.IllegalArgumentException but got org.testng.TestException: 
+Expected exception java.lang.IllegalArgumentException but got java.lang.NullPointerException]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestException: 
+Expected exception java.lang.IllegalArgumentException but got org.testng.TestException: 
+Expected exception java.lang.IllegalArgumentException but got java.lang.NullPointerException
+	at org.testng.internal.Invoker.handleInvocationResults(Invoker.java:1497)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1245)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+Caused by: org.testng.TestException: 
+Expected exception java.lang.IllegalArgumentException but got java.lang.NullPointerException
+	at org.testng.internal.Invoker.handleInvocationResults(Invoker.java:1497)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:754)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	... 16 more
+Caused by: java.lang.NullPointerException
+	at net.intelie.model.MemoryEventStore.insert(MemoryEventStore.java:44)
+	at net.intelie.model.EventStoreInsertTest.insert_NullEventGiven_ShouldThrowException(EventStoreInsertTest.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	... 18 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insert_NullEventGiven_ShouldThrowException -->
+        <test-method status="PASS" signature="close()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="close" is-config="true" duration-ms="0" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+        <test-method status="PASS" signature="insert_SameTypeDiffNumberEventsGiven_ShouldReturnListWith2Events()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="insert_SameTypeDiffNumberEventsGiven_ShouldReturnListWith2Events" duration-ms="1" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insert_SameTypeDiffNumberEventsGiven_ShouldReturnListWith2Events -->
+        <test-method status="PASS" signature="close()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="close" is-config="true" duration-ms="0" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+        <test-method status="PASS" signature="insert_SameTypeSameNumberEventsGiven_ShouldReturn1ListWith2Events()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="insert_SameTypeSameNumberEventsGiven_ShouldReturn1ListWith2Events" duration-ms="1" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insert_SameTypeSameNumberEventsGiven_ShouldReturn1ListWith2Events -->
+        <test-method status="PASS" signature="close()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="close" is-config="true" duration-ms="0" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+        <test-method status="PASS" signature="insert_StoreWithTypeRemoveAllGiven_ShouldReturn1ListWith1Event()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="insert_StoreWithTypeRemoveAllGiven_ShouldReturn1ListWith1Event" duration-ms="1" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- insert_StoreWithTypeRemoveAllGiven_ShouldReturn1ListWith1Event -->
+        <test-method status="PASS" signature="close()[pri:0, instance:net.intelie.model.EventStoreInsertTest@337d0578]" name="close" is-config="true" duration-ms="1" started-at="2019-06-14T02:33:10Z" finished-at="2019-06-14T02:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+      </class> <!-- net.intelie.model.EventStoreInsertTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

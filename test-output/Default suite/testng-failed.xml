@@ -3,11 +3,12 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="net.intelie.model.EventTest">
+      <class name="net.intelie.model.EventStoreInsertTest">
         <methods>
-          <include name="hashCode_SameEventGiven_ShouldReturnTrue"/>
+          <include name="close"/>
+          <include name="insert_NullEventGiven_ShouldThrowException"/>
         </methods>
-      </class> <!-- net.intelie.model.EventTest -->
+      </class> <!-- net.intelie.model.EventStoreInsertTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

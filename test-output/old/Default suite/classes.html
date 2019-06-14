@@ -4,22 +4,38 @@
 <th>Method name</th>
 <th>Groups</th>
 </tr><tr>
-<td>net.intelie.model.StoredEventTest</td>
+<td>net.intelie.model.EventStoreInsertTest</td>
 <td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr>
 <td align='center' colspan='3'>@Test</td>
 </tr>
 <tr>
 <td>&nbsp;</td>
-<td>equals_TwoDiffStoredEventsGiven_ShouldReturnFalse</td>
+<td>insert_EmptyStoreGiven_ShouldReturnAListWith1Event</td>
 <td>&nbsp;</td></tr>
 <tr>
 <td>&nbsp;</td>
-<td>equals_SameStoredEventGiven_ShouldReturnTrue</td>
+<td>insert_DiffTypeDiffNumberEventsGiven_ShouldReturn2ListWith1EventEach</td>
 <td>&nbsp;</td></tr>
 <tr>
 <td>&nbsp;</td>
-<td>hashCode_SameStoredEventGiven_ShouldReturnTrue</td>
+<td>insert_DiffTypeSameNumberEventsGiven_ShouldReturn2ListWith1EventEach</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td>insert_SameTypeSameNumberEventsGiven_ShouldReturn1ListWith2Events</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td>insert_SameTypeDiffNumberEventsGiven_ShouldReturnListWith2Events</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td>insert_StoreWithTypeRemoveAllGiven_ShouldReturn1ListWith1Event</td>
+<td>&nbsp;</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td>insert_NullEventGiven_ShouldThrowException</td>
 <td>&nbsp;</td></tr>
 <tr>
 <td align='center' colspan='3'>@BeforeClass</td>
@@ -30,6 +46,10 @@
 <tr>
 <td align='center' colspan='3'>@AfterMethod</td>
 </tr>
+<tr>
+<td>&nbsp;</td>
+<td>close</td>
+<td>&nbsp;</td></tr>
 <tr>
 <td align='center' colspan='3'>@AfterClass</td>
 </tr>
