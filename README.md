@@ -12,7 +12,7 @@ My implementation of EventStore that stores events in memory.
 
 ## Running tests
 
-All tests can be executed by running. 
+All tests can be executed by running:
 
 > mvn test
 
@@ -23,7 +23,7 @@ Tests in package `src/test/java/net.interlie.concurrency` were done in a multith
  
 ## Running Code Coverage Analysis
 
-Jacoco framework can be executed with maven, by running  
+Jacoco framework can be executed with maven, by running:  
 
 > mvn jacoco:report
 
