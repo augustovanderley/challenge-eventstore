@@ -1,5 +1,5 @@
  
-# Implement EventStore
+# Implementation of EventStore
 
 My implementation of EventStore that stores events in memory.
 
